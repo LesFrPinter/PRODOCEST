@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="ProDocEstimate.Views.DetailFeatures"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:local="clr-namespace:ProDocEstimate.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="160" d:DesignWidth="800" >
+
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Height" Value="22" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="Blue" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="10,0,10,0" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height"                       Value="24"     />
+            <Setter Property="Padding"                      Value="2"      />
+            <Setter Property="FontFamily"                   Value="Courier New" />
+            <Setter Property="FontSize"                     Value="12"     />
+            <Setter Property="Foreground"                   Value="Blue"  />
+            <Setter Property="VerticalAlignment"            Value="Center" />
+            <Setter Property="HorizontalAlignment"          Value="Right"  />
+            <Setter Property="HorizontalContentAlignment"   Value="Right"  />
+            <Setter Property="Margin"                       Value="10,0"   />
+        </Style>
+        <Style TargetType="telerik:RadNumericUpDown">
+            <Setter Property="Height"                   Value="24" />
+            <Setter Property="Padding"                  Value="2" />
+            <Setter Property="FontFamily"               Value="Courier New" />
+            <Setter Property="FontSize"                 Value="12" />
+            <Setter Property="Foreground"               Value="Blue" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment"      Value="Right" />
+            <Setter Property="Margin"                   Value="10,0,0,0" />
+            <Setter Property="Width"                    Value="80" />
+            <Setter Property="SmallChange"              Value="1" />
+            <Setter Property="LargeChange"              Value="10" />
+            <Setter Property="Minimum"                  Value="0" />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="LightGray">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="2" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="8" Background="Yellow" Width="75" HorizontalAlignment="Left" Margin="2" >
+            <Label Grid.Row="0" FontSize="16" Content="Material" Background="Yellow" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="3" BorderBrush="Gray" BorderThickness="0"
+                   Grid.RowSpan="2" Height="22" VerticalContentAlignment="Top" Padding="5 0" />
+        </Border>
+
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"  HorizontalAlignment="Right" Content="NOTE: This feature is not finished" Background="LightPink" Margin="0 0 20 0" Foreground="DarkBlue" Padding="2" />
+
+        <Label Content="Flat Charge:"           Grid.Row="1" />
+        <Label Content="Run Charge:"            Grid.Row="2" />
+        <Label Content="Plate:"                 Grid.Row="3" />
+        <Label Content="Finish Material:"       Grid.Row="4" />
+
+        <Label Content="Converting Material:"   Grid.Row="1" Grid.Column="2" />
+        <Label Content="Press Material:"        Grid.Row="2" Grid.Column="2" />
+
+        <TextBox Width="110" Height="24"        Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  Text="{Binding CalculatedFlatCharge, StringFormat='C'}" HorizontalContentAlignment="Right" />
+        <telerik:RadNumericUpDown 
+            Width="70"    
+            Grid.Row="1" 
+            Grid.Column="1" 
+            HorizontalAlignment="Right" 
+            Height="24" 
+            Margin="25 0" 
+            Value="{Binding FlatCharge, UpdateSourceTrigger=PropertyChanged}" 
+            x:Name="FlatChargePct" 
+            ValueChanged="FlatChargePct_ValueChanged" 
+            NumberDecimalDigits="0" />
+        <Label HorizontalAlignment="Right"      Grid.Row="1" Grid.Column="1" Content="%" VerticalAlignment="Center" />
+
+        <TextBox Width="110" Height="24"        Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  Text="{Binding CalculatedRunCharge,  StringFormat='C'}" HorizontalContentAlignment="Right" />
+        <telerik:RadNumericUpDown 
+            Width="70"    
+            Grid.Row="2" 
+            Grid.Column="1" 
+            HorizontalAlignment="Right" 
+            Height="24" 
+            Margin="25 0" 
+            Value="{Binding RunCharge,  UpdateSourceTrigger=PropertyChanged}" 
+            x:Name="RunChargePct"  
+            ValueChanged="RunChargePct_ValueChanged" 
+            NumberDecimalDigits="0" />
+        <Label HorizontalAlignment="Right"      Grid.Row="2" Grid.Column="1" Content="%" VerticalAlignment="Center" />
+
+        <TextBox Width="110" Height="24"        Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"  Text="{Binding PlateCharge,          StringFormat='C'}" HorizontalContentAlignment="Right" />
+        <telerik:RadNumericUpDown Width="70"    Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Height="24" Margin="25 0" />
+        <Label HorizontalAlignment="Right"      Grid.Row="3" Grid.Column="1" Content="%" VerticalAlignment="Center" />
+
+        <TextBox Width="110" Height="24"        Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"  Text="{Binding FinishMatl,           StringFormat='C'}" HorizontalContentAlignment="Right" />
+        <telerik:RadNumericUpDown Width="70"    Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Height="24" Margin="25 0" />
+        <Label HorizontalAlignment="Right"      Grid.Row="4" Grid.Column="1" Content="%" VerticalAlignment="Center" />
+
+        <TextBox Width="110" Height="24"        Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  Text="{Binding ConvertMatl,          StringFormat='C'}" HorizontalContentAlignment="Right" />
+        <telerik:RadNumericUpDown Width="70"    Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" Height="24" Margin="25 0" />
+        <Label HorizontalAlignment="Right"      Grid.Row="1" Grid.Column="3" Content="%" VerticalAlignment="Center" />
+
+        <TextBox Width="110" Height="24"        Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  Text="{Binding PressMatl,            StringFormat='C'}" HorizontalContentAlignment="Right" />
+        <telerik:RadNumericUpDown Width="70"    Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" Height="24" Margin="25 0" />
+        <Label HorizontalAlignment="Right"      Grid.Row="2" Grid.Column="3" Content="%" VerticalAlignment="Center" />
+
+        <!--<Label Grid.Row="3" Grid.Column="2" Content="{Binding QUOTENUM}"  Width="100" Background="Yellow" />
+        <Label Grid.Row="4" Grid.Column="2" Content="{Binding CATEGORY}"  Width="100" Background="Yellow" />
+        <Label Grid.Row="3" Grid.Column="3" Content="{Binding PRESSSIZE}" Width="100" Background="Yellow" />
+        <Label Grid.Row="4" Grid.Column="3" Content="{Binding FTYPE}"     Width="100" Background="Yellow" />-->
+
+    </Grid>
+
+</UserControl>
